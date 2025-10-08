@@ -8,6 +8,7 @@ import java.util.*;
 public class PortfolioManager {
     private double balance = 10000.0;
     private final Map<String, Integer> holdings = new HashMap<>();
+    private final List<Double> portfolioHistory = new ArrayList<>();
 
 
     public double getBalance() {
@@ -20,11 +21,17 @@ public class PortfolioManager {
     }
 
 
+    public List<Double> getPortfolioHistory() {
+        return portfolioHistory;
+    }
+
+
     public boolean buyStock(String ticker, int shares, double price) {
         double cost = shares * price;
         if (cost > balance) return false;
         balance -= cost;
         holdings.put(ticker, holdings.getOrDefault(ticker, 0) + shares);
+        logPortfolioValue();
         return true;
     }
 
@@ -52,5 +59,15 @@ public class PortfolioManager {
         } catch (IOException e) {
             System.err.println("Failed to import CSV: " + e.getMessage());
         }
+    }
+
+
+    public void logPortfolioValue() {
+        double total = balance;
+        for (Map.Entry<String, Integer> entry : holdings.entrySet()) {
+            double price = StockAPI.fetchPrice(entry.getKey());
+            total += price * entry.getValue();
+        }
+        portfolioHistory.add(total);
     }
 }
