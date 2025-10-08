@@ -7,7 +7,7 @@ import org.json.*;
 
 
 public class StockAPI {
-    private static final String API_KEY = "demo"; // Replace with your actual key
+    private static final String API_KEY = "UX2QC0DFEVV61PX1"; // Replace with your actual key
 
 
     public static double fetchPrice(String ticker) {

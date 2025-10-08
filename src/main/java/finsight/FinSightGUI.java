@@ -7,7 +7,7 @@ import java.awt.event.*;
 import java.util.Map;
 
 
-public class FinSightGUI {
+public class FinSightGUI extends JFrame{
     private final PortfolioManager manager;
     private final JTextArea portfolioArea = new JTextArea();
     private final JLabel balanceLabel = new JLabel();
@@ -115,5 +115,10 @@ public class FinSightGUI {
         }
         JOptionPane.showMessageDialog(null, sb.toString(), "Glossary", JOptionPane.INFORMATION_MESSAGE);
     }
-
+    public static void main(String[] args) {
+        SwingUtilities.invokeLater(() -> {
+            PortfolioManager pm = new PortfolioManager();
+            new FinSightGUI(pm);
+    });
+    }
 }
