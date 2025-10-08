@@ -31,7 +31,6 @@ public class StockAPI {
             JSONObject quote = json.getJSONObject("Global Quote");
             return Double.parseDouble(quote.getString("05. price"));
 
-
         } catch (Exception e) {
             System.err.println("Error fetching price for " + ticker + ": " + e.getMessage());
             return -1.0;
