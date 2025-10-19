@@ -4,10 +4,12 @@ package finsight;
 import java.io.*;
 import java.net.*;
 import org.json.*;
+import io.github.cdimascio.dotenv.Dotenv;
 
 
 public class StockAPI {
-    private static final String API_KEY = "UX2QC0DFEVV61PX1"; // Replace with your actual key
+    private static final Dotenv dotenv = Dotenv.load();
+    private static final String API_KEY = dotenv.get("API_KEY");
 
 
     public static double fetchPrice(String ticker) {
